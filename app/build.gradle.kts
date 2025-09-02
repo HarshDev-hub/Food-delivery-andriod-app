@@ -1,12 +1,12 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
+    alias(libs.plugins.google.gms.google.services)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
-    kotlin("plugin.serialization") version "2.0.0"
-    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -21,6 +21,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -41,6 +44,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
 
@@ -67,48 +73,47 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
-    //Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("com.github.bumptech.glide:compose:1.0.0-alpha.1")
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
 
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
-
-    // this ia for hillt dependency injection
-    implementation("com.google.dagger:hilt-android:2.56.2")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    // Hilt - Use consistent versions (2.51.1 is the latest stable as of now)
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1") // Consistent version
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    // Remove the duplicate: kapt(libs.androidx.hilt.compiler)
 
-
-
-    // this is for coil
+    // Coil
     implementation("io.coil-kt:coil-compose:2.6.0")
 
-
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.8.0-beta06")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
+    // Accompanist Pager
+    implementation ("com.google.accompanist:accompanist-pager:0.32.0")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.32.0")
 
-
-    //this is for pager
-    implementation ("com.google.accompanist:accompanist-pager:0.28.0")
-    implementation ("com.google.accompanist:accompanist-pager-indicators:0.28.0")
-
-// this is for payment getway
+    // Payment gateway
     implementation ("com.razorpay:checkout:1.6.40")
 
-
-    //custem bottom nev bar
+    // Custom bottom nav bar
     implementation ("com.canopas.compose-animated-navigationbar:bottombar:1.0.1")
 
-    //lottie for Place order dialog
-    implementation ("com.airbnb.android:lottie-compose:4.2.0")
+    // Lottie
+    implementation ("com.airbnb.android:lottie-compose:6.4.0")
 
+    // System UI Controller
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
-    //splashScreen
+    // Splash Screen
     implementation("androidx.core:core-splashscreen:1.0.1")
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

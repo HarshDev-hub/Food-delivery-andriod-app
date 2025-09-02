@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.fooddeliveryapp.prsentation.component.ExploreRow
 import com.example.fooddeliveryapp.ui.theme.FoodDeliveryAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +22,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FoodDeliveryAppTheme {
-
             }
         }
     }
